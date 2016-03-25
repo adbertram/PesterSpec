@@ -1,0 +1,17 @@
+﻿<ProjectState>
+  <Version>1.0</Version>
+  <FileID>a5f624b9-51d8-4a94-ae22-92664f016a78</FileID>
+  <OpenFolders>
+    <Folder>Modules</Folder>
+    <Folder>ExampleTests</Folder>
+    <Folder>Tests</Folder>
+  </OpenFolders>
+  <OpenFiles>
+    <File>Modules\File.psm1</File>
+    <File>Modules\Service.psm1</File>
+    <File>Modules\PesterSpec.psm1</File>
+    <File>ExampleTests\AppX.Tests.ps1</File>
+    <File>Tests\File.Tests.ps1</File>
+    <File>Modules\ActiveDirectory.psm1</File>
+  </OpenFiles>
+</ProjectState>
