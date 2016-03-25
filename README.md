@@ -32,7 +32,7 @@ PesterSpec was built to ensure the changes you make to your Windows infrastructu
 3. Modify the example tests provided in ExampleTests to your liking.
 4. Run the test script.
 
-Start-PesterSpecTest -Path C:\AppX.Tests.ps1
+`Start-PesterSpecTest -Path C:\AppX.Tests.ps1`
 
 5. See how well your scripts worked.
 
