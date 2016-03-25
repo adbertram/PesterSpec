@@ -23,3 +23,13 @@ Describe 'AD test' {
 	ActiveDirectoryGroup -Name 'Group 1' -DomainName 'mylab.local' -Scope 'Universal'
 	ActiveDirectoryGroup -Name 'Group 1' -DomainName 'mylab.local' -Type 'Security'
 }
+
+describe 'DNS record test' {
+	DNSRecord -Name 'DC' -Server 'DC' -ZoneName 'mylab.local'
+	DNSRecord -Name 'DC' -Server 'DC' -ZoneName 'mylab.local' -Type 'CNAME'
+	DNSRecord -Name 'DC' -Server 'DC' -ZoneName 'mylab.local' -Type 'A'
+	DNSRecord -Name 'DC' -Server 'DC' -ZoneName 'mylab.local' -IPV4Address '192.168.1.33'
+	DNSRecord -Name 'DC' -Server 'DC' -ZoneName 'mylab.local' -IPV4Address '192.168.0.120'
+	DNSRecord -Name 'DC' -Server 'DC' -ZoneName 'mylab.local' -IPV4Address '192.168.0.120' -Type 'A'
+	DNSRecord -Name 'DC' -Server 'DC' -ZoneName 'mylab.local' -IPV4Address '192.168.0.120' -Type 'CNAME'
+}

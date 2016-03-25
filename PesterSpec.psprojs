@@ -9,9 +9,9 @@
   <OpenFiles>
     <File>Modules\File.psm1</File>
     <File>Modules\Service.psm1</File>
-    <File>Modules\PesterSpec.psm1</File>
     <File>ExampleTests\AppX.Tests.ps1</File>
-    <File>Tests\File.Tests.ps1</File>
-    <File>Modules\ActiveDirectory.psm1</File>
+    <File>Modules\VirtualMachine.psm1</File>
+    <File>Modules\PesterSpec.psm1</File>
+    <File>Modules\VirtualMachine-VirtualMachineManager.psm1</File>
   </OpenFiles>
 </ProjectState>
