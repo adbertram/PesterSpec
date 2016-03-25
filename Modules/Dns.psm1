@@ -1,3 +1,43 @@
+function DnsZone
+{
+	[CmdletBinding()]
+	param
+	(
+		[Parameter(Mandatory)]
+		[ValidateNotNullOrEmpty()]
+		[string]$Name,
+		
+		[Parameter(Mandatory)]
+		[ValidateNotNullOrEmpty()]
+		[string]$Server,
+	
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
+		[ValidateSet('Primary')]
+		[string]$Type
+		
+	)
+	
+	$scriptBlock = {
+		Get-DnsServerZone -Name $using:Name -ErrorAction 'SilentlyContinue'
+	}
+	
+	$zone = Invoke-Command -ComputerName $Server -ScriptBlock $scriptBlock -HideComputerName
+	
+	if (-not $PSBoundParameters.ContainsKey('Type')) {
+		it "DNS zone [$($Name)] exists on server [$($Server)]" {
+			$zone | Should not be $null
+		}
+	}
+	
+	if ($PSBoundParameters.ContainsKey('Type'))
+	{
+		it "DNS zone [$($Name)] on server [$($Server)] is type [$($Type)]" {
+			$zone.ZoneType | Should be $Type
+		}
+	}
+}
+
 function DnsRecord
 {
 	[CmdletBinding()]
@@ -10,7 +50,7 @@ function DnsRecord
 		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ZoneName,
-	
+		
 		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]
 		[string]$Server,
@@ -18,10 +58,10 @@ function DnsRecord
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
 		[string]$IpV4Address,
-	
+		
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
-		[ValidateSet('A','CNAME')]
+		[ValidateSet('A', 'CNAME')]
 		[string]$Type
 	)
 	
@@ -31,9 +71,10 @@ function DnsRecord
 	
 	$record = Invoke-Command -ComputerName $Server -ScriptBlock $scriptBlock -HideComputerName
 	
-	if ($PSBoundParameters.ContainsKey('Type')) {
+	if ($PSBoundParameters.ContainsKey('Type'))
+	{
 		it "DNS record [$($Name)] is in zone [$($ZoneName)] and is type [$($Type)]" {
-			$record.RecordType | Should be $Type		
+			$record.RecordType | Should be $Type
 		}
 	}
 	
