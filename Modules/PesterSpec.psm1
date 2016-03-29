@@ -17,7 +17,7 @@ function New-ValidationDynamicParam
 		[switch]$Mandatory = $false,
 		
 		[Parameter()]
-		[string]$ParameterSetName = '__AllParameterSets',
+		[string[]]$ParameterSetName = '__AllParameterSets',
 		
 		[Parameter()]
 		[switch]$ValueFromPipeline = $false,

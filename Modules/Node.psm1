@@ -5,11 +5,14 @@ function Node
 	(
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
-		[string]$HostName,
-	
-		[Parameter()]
-		[ValidateNotNullOrEmpty()]
-		[ipaddress]$IpAddress
+		[string]$HostName
 	)
 	
+	$scriptBlock = {
+		$env:COMPUTERNAME
+	}
+	
+	it "should have a hostname of [$($HostName)]" {
+		Invoke-Command -ComputerName $HostName -ScriptBlock $scriptBlock | Should be $HostName
+	}
 }
