@@ -13,5 +13,8 @@
     <File>Modules\PesterSpec.psd1</File>
     <File>Modules\IISServer.psm1</File>
     <File>Modules\WindowsFeature.psm1</File>
+    <File>Modules\Node.psm1</File>
+    <File>Modules\Node-VirtualMachine-VirtualMachineManager.psd1</File>
+    <File>Modules\Dns.psm1</File>
   </OpenFiles>
 </ProjectState>

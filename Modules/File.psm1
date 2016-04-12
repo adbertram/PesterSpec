@@ -1,54 +1,49 @@
 function File
 {
-	[CmdletBinding(DefaultParameterSetName = 'None')]
+	[CmdletBinding()]
 	param
 	(
 		[Parameter(Mandatory)]
 		[ValidateNotNullOrEmpty()]
-		[string]$Node,
-		
-		[Parameter(Mandatory)]
-		[ValidateNotNullOrEmpty()]
 		[string]$Path,
 		
-		[Parameter(Mandatory,ParameterSetName = 'Size')]
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
+		[string]$Node,
+		
+		[Parameter()]
 		[ValidateNotNullOrEmpty()]
 		[int]$SizeInBytes,
-		
-		[Parameter(Mandatory, ParameterSetName = 'Exists')]
-		[ValidateNotNullOrEmpty()]
-		[switch]$Exists,
 		
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
 		[pscredential]$Credential
 	)
 	
-	$icmParams = @{
-		'ComputerName' = $Node
-	}
-	if ($PSBoundParameters.ContainsKey('Credential'))
-	{
-		$icmParams.Credential = $Credential
-	}
-	
-	$file = Invoke-Command @icmParams -ScriptBlock { Get-Item -Path $using:Path -ErrorAction Ignore }
-	
-	switch ($PSCmdlet.ParameterSetName)
-	{
-		'Exists' {
-			it "The file [$($Path)] exists" {
-				$file | Should not be $null
-			}
+	if ($PSBoundParameters.ContainsKey('Node')) {
+		$icmParams = @{
+			'ComputerName' = $Node
 		}
-		'Size' {
-			it "The file [$($Path)] is [$($SizeInBytes)] bytes" {
-				$file.Length | Should be $SizeInBytes
-			}
-		}
-		default
+		if ($PSBoundParameters.ContainsKey('Credential'))
 		{
-			throw "Unrecognized parameter set: [$($_)]"
+			$icmParams.Credential = $Credential
+		}
+		
+		$file = Invoke-Command @icmParams -ScriptBlock { Get-Item -Path $using:Path -ErrorAction Ignore }
+	}
+	else
+	{
+		$file = Get-Item -Path $Path -ErrorAction Ignore	
+	}
+	
+	it "The file [$($Path)] exists." {
+		$file | Should not BeNullOrEmpty
+	}
+	
+	if ($PSBoundParameters.ContainsKey('SizeInBytes'))
+	{
+		it "The file [$($Path)] is [$($SizeInBytes)] bytes" {
+			$file.Length | Should be $SizeInBytes
 		}
 	}
 }
