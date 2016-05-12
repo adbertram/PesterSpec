@@ -49,7 +49,7 @@
 #}
 #
 #describe 'VMM test with host' {
-#	VirtualMachine -Type VMM -Name 'BAPP85LSS02' -VMHost 'RWC1BINF04VIR06.genomichealth.com'
+#	VirtualMachine -Type VMM -Name 'BAPP85LSS02' -VMHost ''
 #}
 #
 #describe 'Azure VM test' {
